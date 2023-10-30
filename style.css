@@ -40,7 +40,7 @@ input{
     color:var(--cor-letra);
     border: none;
     border-radius: 0.5em;
-    outline: nome;
+    outline: none;
 }
 button{
     outline: none;
@@ -96,4 +96,12 @@ button{
     background-color: #ddd;
     color: var(--cor-fundo-tela);
 
+}
+@media (max-width: 1200px) {
+
+    .container{
+        margin-left:20%;
+    }
+
+    
 }
