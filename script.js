@@ -18,6 +18,8 @@ function displayWords(value) {
 
 function removeElements() {
     listContainer.innerHTML = "";
+}
+function removeElements(){
     showContainer.innerHTML = "";
 }
 
