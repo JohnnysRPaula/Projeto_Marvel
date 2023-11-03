@@ -18,11 +18,13 @@ function displayWords(value) {
 
 function removeElements() {
     listContainer.innerHTML = "";
+    showContainer.innerHTML = "";
 }
+
 
 input.addEventListener("keyup", async () => {
     removeElements();
-    if (input.value.length < 4) {
+    if (input.value.length < 3) {
         return false;
     }
 
@@ -34,6 +36,7 @@ input.addEventListener("keyup", async () => {
 
     const url = `https://gateway.marvel.com:443/v1/public/characters?ts=${hora}&apikey=${publicKey2}&hash=${hash2}&nameStartsWith=${input.value}`;
 
+    
     const response = await fetch(url);
     const jsonData = await response.json();
 
@@ -42,8 +45,7 @@ input.addEventListener("keyup", async () => {
         let div = document.createElement("div");
         div.style.cursor = "pointer";
         div.classList.add("autocomeplete-items");
-        div.setAttribute("onclick", "displaWords('" +
-            name + "')");
+        div.setAttribute("onclick", "displaWords('" + name + "')");
         let word = "<b>" + name.substr(0, input.value.length) + "</b>";
         word += name.substr(input.value.length);
         div.innerHTML = `<p class="item">${word}</p>`;
@@ -62,9 +64,12 @@ function displaWords(name) {
 
 button.addEventListener("click", (getRsult = async () => {
 
+
+
     if (input.value.trim().length < 1) {
         alert("Entrada não pode ficar um Branco");
     }
+
 
     var hora = new Date().getHours();
     var privateKey2 = "b005f4ffb8ef408051da3fd568270ba4f24c4410";
@@ -72,17 +77,15 @@ button.addEventListener("click", (getRsult = async () => {
     var hash2 = CryptoJS.MD5(hora + privateKey2 + publicKey2).toString();
 
 
-    showContainer.innerHTML = "";
+
     const url2 = `https://gateway.marvel.com:443/v1/public/characters?ts=${hora}&apikey=${publicKey2}&hash=${hash2}&name=${input.value}`;
 
     const response = await fetch(url2);
     const jsonData = await response.json();
     jsonData.data["results"].forEach((element) => {
-        showContainer.innerHTML = `<div
-            class="card-container">  
-            <div class="container-character-image">
-            <img src="${element.thumbnail["path"] + "." + element.
-                thumbnail["extension"]
+        showContainer.innerHTML = `<div class="card-container">
+        <div class="container-character-image">
+            <img src="${element.thumbnail["path"] + "." + element.thumbnail["extension"]
             }"/></div>
             <div class="character-name">${element.name}
             </div>
@@ -94,5 +97,5 @@ button.addEventListener("click", (getRsult = async () => {
 })
 );
 window.onload = () => {
-     getRsult();
- };
+    getRsult();
+};
