@@ -82,6 +82,9 @@ button.addEventListener("click", (getRsult = async () => {
 
     const response = await fetch(url2);
     const jsonData = await response.json();
+    if(jsonData.data.results.length == 0){
+        alert("Personagem não existe");
+    }else{
     jsonData.data["results"].forEach((element) => {
         showContainer.innerHTML = `<div class="card-container">
         <div class="container-character-image">
@@ -93,7 +96,7 @@ button.addEventListener("click", (getRsult = async () => {
                 description}</div>
             </div>`;
 
-    });
+    })};
 })
 );
 window.onload = () => {
